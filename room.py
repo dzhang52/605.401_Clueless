@@ -1,3 +1,8 @@
+# Wrapper class to add asSymbol method for strings
+class String(str):
+    def asSymbol(self):
+        return self
+
 class Direction(object):
     left = 0
     up = 1
@@ -9,7 +14,7 @@ class Direction(object):
         base = int('11', 2)
         oppositeDir = (position + 2) & base
 
-        print "oppositeDir: " + str(oppositeDir)
+        #print "oppositeDir: " + str(oppositeDir)
         return oppositeDir
 
 class BoardSpace(object):
@@ -19,6 +24,7 @@ class BoardSpace(object):
     #connectedTo = [None, None, None, None]
 
     def __init__(self, length, width):
+        #self.boardPosition = [0,0]
         self.length = length
         self.width = width
         self.connectedTo = [None, None, None, None] #[left, up, right, down]
@@ -28,8 +34,9 @@ class BoardSpace(object):
         self.connectedTo[position] = connection
         connection.connectedTo[Direction.opposite(position)] = self
 
-        print "self.connectedTo: " + str(self.connectedTo)
-        print "connection.connectedTo " + str(connection.connectedTo)
+    def asSymbol(self):
+        return "x"
+        
 
 
 class Room(BoardSpace):
@@ -42,35 +49,76 @@ class Room(BoardSpace):
         super(Room,self).__init__(3,3)
         #print "Room length: " + str(self.length)
 
-    def print(self):
-        for i in range(self.length):
-            for j in range(self.width):
-                print "+"
+    def asMatrix(self):
+        return [[ self for x in range(self.width)] for y in range(self.length) ]
+
+    # def print(self):
+    #     for i in range(self.length):
+    #         for j in range(self.width):
+    #             print "+"
 
     
 class Hallway(BoardSpace):
     
     def __init__(self): #connections is an array
         #print "in Hallway"
-        super(Hallway,self).__init__(1,1)
+        super(Hallway,self).__init__(1,3)
         #print "Hallway length: " + str(self.length)
 
-    def print(self):
-        for connection in connectedTo:
-            if connection == None:
-                print " "
+    def asMatrix(self):
+        returnMatrix = [[String(' ')]]
+        if self.connectedTo[Direction.right] == None:
+            returnMatrix[0] += [self] + [String(' ')]
+        elif self.connectedTo[Direction.up] == None:
+            returnMatrix += [[self]] + [[String(' ')]]
+
+        return returnMatrix
+
+    # def print(self):
+    #     for connection in connectedTo:
+    #         if connection == None:
+    #             print " "
 
 class GameBoard(object):
 
-    def __init__(self):
-        self.sideLength = 11
-        self.board = [[ 0 for x range(sideLength) for y in range(sideLength) ]]
-        print "in gameboard"
+    # def __init__(self):
+    #     self.sideLength = 11
+    #     self.board = [[ ' ' for x in range(self.sideLength)] for y in range(self.sideLength) ]
+
+    #     self.testB01 = [[ 'x' for x in range(3)] for y in range(3) ]
+    #     self.testB02 = [[ 'y' for x in range(3)] for y in range(1) ]
+
+    #     self.testA = self.testB01 + self.testB02
+    #     print "in gameboard"
+    #     print self.testB02
+    #     print self.testA
+    #     self.printBoard(self.testA)
+
+    # def test(self):
+    #     for row in self.board:
+    #         for item in row:
+    #             print item
     
     def printBoard(self):
-        
+        print('\n'.join([''.join(['{:2}'.format(item.asSymbol()) for item in row]) for row in self.board]))
 
-    def initialize():
+    def concatenateMatrices(self, *matrices):
+        # rowNum = 0
+        # while rowNum < len(attachment):
+        #     try:
+        #         self.board[rowNum] += attachment[rowNum]
+        #     except IndexError:
+        #         self.board += attachment[rowNum:]
+        
+        returnMatrix = [[] for i in range(len(matrices[0]))]
+        for matrix in matrices:
+            for rowNum in range(len(matrix)):
+                returnMatrix[rowNum] += matrix[rowNum]
+
+        return returnMatrix
+
+
+    def initialize(self):
         study = Room()
         hall = Room()
         library = Room()
@@ -127,8 +175,20 @@ class GameBoard(object):
         kitchen.addConnection(Direction.left, hallway12)
         kitchen.addConnection(Direction.up, hallway10)
 
-
-
+        self.board = self.concatenateMatrices(study.asMatrix(), hallway1.asMatrix(), hall.asMatrix(), hallway2.asMatrix(), lounge.asMatrix()) + \
+                     self.concatenateMatrices(hallway3.asMatrix(), [[String(' ')]], hallway4.asMatrix(), [[String(' ')]], hallway5.asMatrix()) + \
+                     self.concatenateMatrices(library.asMatrix(), hallway6.asMatrix(), billiardRoom.asMatrix(), hallway7.asMatrix(), diningRoom.asMatrix()) + \
+                     self.concatenateMatrices(hallway8.asMatrix(), [[String(' ')]], hallway9.asMatrix(), [[String(' ')]], hallway10.asMatrix()) + \
+                     self.concatenateMatrices(conservatory.asMatrix(), hallway11.asMatrix(), ballRoom.asMatrix(), hallway12.asMatrix(), kitchen.asMatrix())
 
 if __name__ == '__main__':
     gameBoard = GameBoard()
+    gameBoard.initialize()
+    gameBoard.printBoard()
+    #gameBoard.test()
+    #roomEx = Room()
+    #roomBoard = roomEx.asSymbol()
+    #print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in roomBoard]))
+
+    #hallwayEx = Hallway()
+    #print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in hallwayEx.asSymbol()]))

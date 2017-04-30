@@ -130,7 +130,7 @@ class GameBoard(object):
     #             print item
     
     def printBoard(self):
-        print('\n'.join([''.join(['{:2}'.format(item.asSymbol()) for item in row]) for row in self.board]))
+        return '\n'.join([''.join(['{:2}'.format(item.asSymbol()) for item in row]) for row in self.board])
 
     def concatenateMatrices(self, *matrices):
         # rowNum = 0
@@ -296,8 +296,9 @@ class GameBoard(object):
 if __name__ == '__main__':
     gameBoard = GameBoard()
     gameBoard.initialize()
-    gameBoard.printBoard()
+    print gameBoard.printBoard()
     print gameBoard.discardedObj
+    print "discardedObj length: " + str(len(gameBoard.discardedObj))
     print gameBoard.hallways[2].boardObjects
 
     charEx = Character("Colonel Mustant", "M")

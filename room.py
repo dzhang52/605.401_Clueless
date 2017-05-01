@@ -1,5 +1,5 @@
 from random import shuffle
-from Test import *
+from BoardGUI import *
 
 
 # Wrapper class to add asSymbol method for strings

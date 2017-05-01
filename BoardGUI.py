@@ -1,9 +1,7 @@
-from PyQt5 import QtWidgets, QtGui, QtCore
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QGridLayout, QSizePolicy, QLabel, \
-  QVBoxLayout
-from PyQt5.QtGui import QPixmap, QPainter, QPalette, QBrush
-from PyQt5.QtCore import Qt, QSize, QPoint
-import sys, os
+from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
+import os
 
 
 class BoardGUI(QtWidgets.QWidget):

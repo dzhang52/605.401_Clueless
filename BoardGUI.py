@@ -1,14 +1,12 @@
-from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtCore import Qt
 import os, sys
-from PyQt5.QtWidgets import QVBoxLayout, QBoxLayout, QHBoxLayout, QGridLayout
-
+from PySide.QtCore import Qt
+from PySide.QtGui import QPixmap
+from qtpy import QtWidgets, QtGui
 
 
 class BoardGUI(QtWidgets.QWidget):
   def __init__(self):
-    super().__init__()
+    super(BoardGUI, self).__init__()
     #self.init_ui()
 
   def init_ui(self):

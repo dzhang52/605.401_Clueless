@@ -1,7 +1,9 @@
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
-import os
+import os, sys
+from PyQt5.QtWidgets import QVBoxLayout, QBoxLayout, QHBoxLayout, QGridLayout
+
 
 
 class BoardGUI(QtWidgets.QWidget):
@@ -10,11 +12,11 @@ class BoardGUI(QtWidgets.QWidget):
     #self.init_ui()
 
   def init_ui(self):
-
     self.resize(2650, 1650)  #size of one box is 150x150pixels
     self.setWindowTitle("Clueless")
     self.setWindowIcon(QtGui.QIcon('mag.png'))
     self.set_background()
+    #self.detective_notes()
     #self.boardlayout()
     #self.player_setup()
     self.show()
@@ -23,7 +25,6 @@ class BoardGUI(QtWidgets.QWidget):
     p = self.palette()
     p.setColor(self.backgroundRole(), Qt.gray)
     self.setPalette(p)
-
 
   def boardlayout(self):
     # These are all the rooms in column 1
@@ -160,12 +161,120 @@ class BoardGUI(QtWidgets.QWidget):
       plum.move(p[i], p[j])
       plum.setPixmap(purpleIcon)
 
+  def detective_notes(self):
+    notes = QtWidgets.QWidget(self)
+    suspects = QtWidgets.QWidget(self)
+    weapons = QtWidgets.QWidget(self)
+    rooms = QtWidgets.QWidget(self)
+    notes.setGeometry(1700, 0, 950, 1650)
+
+    Title1 = QtWidgets.QLabel(self)
+    Title1.setStyleSheet(" font-size: 50px; font-style: bold; qproperty-alignment: AlignCenter; font-family: Times New Roman;")
+    Title2 = QtWidgets.QLabel(self)
+    Title2.setStyleSheet(" font-size: 40px; font-style: bold; qproperty-alignment: AlignLeft; font-family: Times New Roman;")
+    Title3 = QtWidgets.QLabel(self)
+    Title3.setStyleSheet(" font-size: 40px; font-style: bold; qproperty-alignment: AlignLeft; font-family: Times New Roman;")
+    Title4 = QtWidgets.QLabel(self)
+    Title4.setStyleSheet(" font-size: 40px; font-style: bold; qproperty-alignment: AlignLeft; font-family: Times New Roman;")
+
+    Suspect1 = QtWidgets.QLabel(self)
+    Suspect2 = QtWidgets.QLabel(self)
+    Suspect3 = QtWidgets.QLabel(self)
+    Suspect4 = QtWidgets.QLabel(self)
+    Suspect5 = QtWidgets.QLabel(self)
+    Suspect6 = QtWidgets.QLabel(self)
+
+    Weapon1 = QtWidgets.QLabel(self)
+    Weapon2 = QtWidgets.QLabel(self)
+    Weapon3 = QtWidgets.QLabel(self)
+    Weapon4 = QtWidgets.QLabel(self)
+    Weapon5 = QtWidgets.QLabel(self)
+    Weapon6 = QtWidgets.QLabel(self)
+
+    Room1 = QtWidgets.QLabel(self)
+    Room2 = QtWidgets.QLabel(self)
+    Room3 = QtWidgets.QLabel(self)
+    Room4 = QtWidgets.QLabel(self)
+    Room5 = QtWidgets.QLabel(self)
+    Room6 = QtWidgets.QLabel(self)
+    Room7 = QtWidgets.QLabel(self)
+    Room8 = QtWidgets.QLabel(self)
+    Room9 = QtWidgets.QLabel(self)
+
+    TextEdit = QtWidgets.QTextEdit(self)
+
+    Title1.setText("Detective Notes")
+    Title2.setText("Suspects")
+    Title3.setText("Location")
+    Title4.setText("Weapon")
+
+    Suspect1.setText("test1")
+    Suspect2.setText("test2")
+    Suspect3.setText("test3")
+    Suspect4.setText("test4")
+    Suspect5.setText("test5")
+    Suspect6.setText("test6")
+
+    Weapon1.setText("test1")
+    Weapon2.setText("test2")
+    Weapon3.setText("test3")
+    Weapon4.setText("test4")
+    Weapon5.setText("test5")
+    Weapon6.setText("test6")
+
+    Room1.setText("Test1")
+    Room2.setText("Test2")
+    Room3.setText("Test3")
+    Room4.setText("Test4")
+    Room5.setText("Test5")
+    Room6.setText("Test6")
+    Room7.setText("Test7")
+    Room8.setText("Test8")
+    Room9.setText("Test9")
 
 
+    suspect_grid = QtWidgets.QGridLayout()
+    suspect_grid.addWidget(Suspect1, 0, 0)
+    suspect_grid.addWidget(Suspect2, 1, 0)
+    suspect_grid.addWidget(Suspect3, 2, 0)
+    suspect_grid.addWidget(Suspect4, 0, 1)
+    suspect_grid.addWidget(Suspect5, 1, 1)
+    suspect_grid.addWidget(Suspect6, 2, 1)
 
-'''
-if __name__ == "__main__":
-  app = QtWidgets.QApplication(sys.argv)
-  game = BoardGUI()
-  app.exec_()
-'''
+    suspects.setLayout(suspect_grid)
+
+    weapon_grid = QtWidgets.QGridLayout()
+    weapon_grid.addWidget(Weapon1, 0, 0)
+    weapon_grid.addWidget(Weapon2, 1, 0)
+    weapon_grid.addWidget(Weapon3, 2, 0)
+    weapon_grid.addWidget(Weapon4, 0, 1)
+    weapon_grid.addWidget(Weapon5, 1, 1)
+    weapon_grid.addWidget(Weapon6, 2, 1)
+
+    weapons.setLayout(weapon_grid)
+
+    room_grid = QtWidgets.QGridLayout()
+    room_grid.addWidget(Room1, 0, 0)
+    room_grid.addWidget(Room2, 1, 0)
+    room_grid.addWidget(Room3, 2, 0)
+    room_grid.addWidget(Room4, 0, 1)
+    room_grid.addWidget(Room5, 1, 1)
+    room_grid.addWidget(Room6, 2, 1)
+    room_grid.addWidget(Room7, 0, 2)
+    room_grid.addWidget(Room8, 1, 2)
+    room_grid.addWidget(Room9, 2, 2)
+
+    rooms.setLayout(room_grid)
+
+    vbox = QtWidgets.QVBoxLayout()
+    vbox.addWidget(Title1)
+    vbox.addWidget(Title2)
+    vbox.addWidget(suspects)
+    vbox.addWidget(Title3)
+    vbox.addWidget(rooms)
+    vbox.addWidget(Title4)
+    vbox.addWidget(weapons)
+    vbox.addWidget(TextEdit)
+
+    notes.setLayout(vbox)
+

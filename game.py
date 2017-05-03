@@ -284,6 +284,7 @@ class GameBoard(object):
     self.board[position[0]][position[1]] = boardObject
     boardObject.setPosition(position)
     game.player_setup(str(boardObject.getName()), position[0], position[1])                                       #Added to drop player locations
+    game.weapon_setup(str(boardObject.getName()), position[0], position[1])                                       #Added to drop player locations
 
   def delBoardObject(self, boardObject):
     position = boardObject.position
@@ -314,6 +315,7 @@ class GameBoard(object):
 if __name__ == '__main__':
   app = QtWidgets.QApplication(sys.argv)
   game = BoardGUI()
+  game.size()
   game.boardlayout()
   game.detective_notes()
   gameBoard = GameBoard()

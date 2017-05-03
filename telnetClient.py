@@ -1,5 +1,6 @@
 # telnet program example
 import socket, select, string, sys, os, errno
+import threading
 from thread import *
  
 def threaded_inputListener(conn):
@@ -8,13 +9,13 @@ def threaded_inputListener(conn):
         try:
             data = conn.recv(4096)
             if not data:
-                print 'Connection closed'
+                print('Connection closed')
                 sys.exit()
             else:
                 sys.stdout.write(data)
         except socket.error as e:
             if e.errno == errno.WSAECONNRESET:
-                print 'Server is down'
+                print('Server is down')
                 #interrupt_main()
                 os._exit(1)
 
@@ -22,7 +23,7 @@ def threaded_inputListener(conn):
 if __name__ == "__main__":
      
     if(len(sys.argv) < 3) :
-        print 'Usage : python telnet.py hostname port'
+        print('Usage : python telnet.py hostname port')
         sys.exit()
      
     host = sys.argv[1]
@@ -35,14 +36,15 @@ if __name__ == "__main__":
     try :
         s.connect((host, port))
     except :
-        print 'Unable to connect'
+        print('Unable to connect')
         sys.exit()
      
-    print 'Connected to remote host'
+    print('Connected to remote host')
 
-    start_new_thread(threaded_inputListener,(s,))
+    #threading.Thread(target=threaded_inputListener, args=(s,)).start() #python3
+    start_new_thread(threaded_inputListener,(s,)) #python2
      
-    while 1:
+    while True:
         '''
         socket_list = [sys.stdin, s]
          

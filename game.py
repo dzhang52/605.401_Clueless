@@ -150,13 +150,13 @@ class GameBoard(object):
 
     def initialize(self):
         mustard = Character("Colonel Mustard", "M")
-        scarle = Character("Miss Scarle", "S")
+        scarlet = Character("Miss Scarlet", "S")
         plum = Character("Professor Plum", "P")
         green = Character("Mr. Green", "G")
         white = Character("Mrs. White", "W")
         peacock = Character("Mrs. Peacock", "B")
 
-        self.characters = [mustard, scarle, plum, green, white, peacock]
+        self.characters = [mustard, scarlet, plum, green, white, peacock]
 
         rope = Weapon("Rope", "R")
         pipe = Weapon("Lead Pipe", "L")
@@ -241,9 +241,9 @@ class GameBoard(object):
         
         self.discardedObj = {}
 
-        #self.board[0][2] = scarle
+        #self.board[0][2] = scarlet
         self.addBoardObject(mustard, [3,9])
-        self.addBoardObject(scarle, [1,7])
+        self.addBoardObject(scarlet, [1,7])
         self.addBoardObject(plum, [3,1])
         self.addBoardObject(peacock, [7,1])
         self.addBoardObject(green, [9,3])
@@ -296,13 +296,13 @@ class GameBoard(object):
 if __name__ == '__main__':
     gameBoard = GameBoard()
     gameBoard.initialize()
-    print gameBoard.printBoard()
-    print gameBoard.discardedObj
-    print "discardedObj length: " + str(len(gameBoard.discardedObj))
-    print gameBoard.hallways[2].boardObjects
+    print(gameBoard.printBoard())
+    print(gameBoard.discardedObj)
+    print("discardedObj length: " + str(len(gameBoard.discardedObj)))
+    print(gameBoard.hallways[2].boardObjects)
 
     charEx = Character("Colonel Mustant", "M")
-    print charEx.asSymbol()
+    print(charEx.asSymbol())
     #gameBoard.test()
     #roomEx = Room()
     #roomBoard = roomEx.asSymbol()

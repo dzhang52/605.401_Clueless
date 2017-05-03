@@ -119,7 +119,7 @@ def printAll(players, message):
 
     print(message)
 
-def print4Player(player,message):
+def printToPlayer(player,message):
     #str += '\n'
 
     player.conn.sendall(str(message) + '\n')
@@ -183,6 +183,21 @@ if __name__ == "__main__":
     #playerInput = getPlayerInput(players[0], "Test getPlayerInput()\n")
     #print("playerInput: " + playerInput)
 
+    characters = gameBoard.characters
+    for player in players:
+        while player.character == '':
+            printToPlayer(player, "Select a character from the following:")
+            charCounter = 0
+            for character in characters:
+                printToPlayer(player, str(charCounter) + ". " + character.name)
+                charCounter+=1
+            try:
+                charIdx = int(getPlayerInput(player, "Please enter the index of the character: "))
+                player.character = characters[charIdx]
+            except Exception:
+                printToPlayer(player, "Please enter a valid input")
+        del characters[charIdx]
+
     cardDeck = CardDeck()
     secretEnvelope = cardDeck.dealSecretEnvelope()
 
@@ -191,7 +206,7 @@ if __name__ == "__main__":
     cardDeck.dealCards(players)
 
     for player in players:
-        print4Player(player, player.cards)
+        printToPlayer(player, player.cards)
     
 
     while True:

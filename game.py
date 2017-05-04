@@ -25,10 +25,11 @@ class BoardSpace(object):
     #width = 0
     #connectedTo = [None, None, None, None]
 
-    def __init__(self, length, width, position):
+    def __init__(self, length, width, name, position):
         #self.boardPosition = [0,0]
         self.length = length
         self.width = width
+        self.name = name
         self.position = position
         self.connectedTo = [None, None, None, None] #[left, up, right, down]
         self.boardObjects = []
@@ -53,9 +54,9 @@ class Room(BoardSpace):
     #width = 3
     #connectedTo = [None, None, None, None]
 
-    def __init__(self, position): #connections is an array
+    def __init__(self, name, position): #connections is an array
         #print "in Room"
-        super(Room,self).__init__(3,3,position)
+        super(Room,self).__init__(3,3,name,position)
         #print "Room length: " + str(self.length)
 
     def initializeMatrix(self):
@@ -69,9 +70,9 @@ class Room(BoardSpace):
     
 class Hallway(BoardSpace):
     
-    def __init__(self, position): #connections is an array
+    def __init__(self, name, position): #connections is an array
         #print "in Hallway"
-        super(Hallway,self).__init__(1,1,position)
+        super(Hallway,self).__init__(1,1,name,position)
 
     def initializeMatrix(self):
         self.matrix = [[String(' ')]]
@@ -167,30 +168,30 @@ class GameBoard(object):
 
         self.weapons = [rope, pipe, knife, wrench, candlestick, revolver]
 
-        study = Room([1,1])
-        hall = Room([1,5])
-        library = Room([5,1])
-        lounge = Room([1,9])
-        billiardRoom = Room([5,5])
-        diningRoom = Room([5,9])
-        conservatory = Room([9,1])
-        ballRoom = Room([9,5])
-        kitchen = Room([9,9])
+        study = Room("Study",[1,1])
+        hall = Room("Hall",[1,5])
+        library = Room("Library",[5,1])
+        lounge = Room("Lounge",[1,9])
+        billiardRoom = Room("Billiard Room",[5,5])
+        diningRoom = Room("Dining Room",[5,9])
+        conservatory = Room("Conservatory",[9,1])
+        ballRoom = Room("Ball Room",[9,5])
+        kitchen = Room("Kitchen",[9,9])
 
         self.rooms = [study, hall, library, lounge, billiardRoom, diningRoom, conservatory, ballRoom, kitchen]
 
-        hallway1 = Hallway([1,3])
-        hallway2 = Hallway([1,7])
-        hallway3 = Hallway([3,1])
-        hallway4 = Hallway([3,5])
-        hallway5 = Hallway([3,9])
-        hallway6 = Hallway([5,3])
-        hallway7 = Hallway([5,7])
-        hallway8 = Hallway([7,1])
-        hallway9 = Hallway([7,5])
-        hallway10 = Hallway([7,9])
-        hallway11 = Hallway([9,3])
-        hallway12 = Hallway([9,7])
+        hallway1 = Hallway("Hallway1",[1,3])
+        hallway2 = Hallway("Hallway2",[1,7])
+        hallway3 = Hallway("Hallway3",[3,1])
+        hallway4 = Hallway("Hallway4",[3,5])
+        hallway5 = Hallway("Hallway5",[3,9])
+        hallway6 = Hallway("Hallway6",[5,3])
+        hallway7 = Hallway("Hallway7",[5,7])
+        hallway8 = Hallway("Hallway8",[7,1])
+        hallway9 = Hallway("Hallway9",[7,5])
+        hallway10 = Hallway("Hallway10",[7,9])
+        hallway11 = Hallway("Hallway11",[9,3])
+        hallway12 = Hallway("Hallway12",[9,7])
 
         self.hallways = [hallway1, hallway2, hallway3, hallway4, hallway5, hallway6, hallway7, hallway8 , hallway9, hallway10, hallway11, hallway12]
 
@@ -290,19 +291,20 @@ class GameBoard(object):
             position[1]-=8
 
         return position
-        
-        
 
 if __name__ == '__main__':
     gameBoard = GameBoard()
     gameBoard.initialize()
     print(gameBoard.printBoard())
-    print(gameBoard.discardedObj)
-    print("discardedObj length: " + str(len(gameBoard.discardedObj)))
-    print(gameBoard.hallways[2].boardObjects)
 
-    charEx = Character("Colonel Mustant", "M")
-    print(charEx.asSymbol())
+    #gameBoard.delBoardObject(gameBoard.characters[0])
+    #print(gameBoard.printBoard())
+    ##print(gameBoard.discardedObj)
+    #print("discardedObj length: " + str(len(gameBoard.discardedObj)))
+    #print(gameBoard.hallways[2].boardObjects)
+
+    #charEx = Character("Colonel Mustant", "M")
+    #print(charEx.asSymbol())
     #gameBoard.test()
     #roomEx = Room()
     #roomBoard = roomEx.asSymbol()

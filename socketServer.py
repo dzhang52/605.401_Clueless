@@ -2,6 +2,7 @@ import socket
 import sys
 import errno
 import threading
+import copy
 #import Queue
 
 from thread import *
@@ -110,6 +111,27 @@ def getPlayerInput(firstArg, message):
 
     print("End of getPlayerInput")
 
+def selectFromList(player, list, attr='__str__', callable=True):
+    validInput = False
+    while True:
+        printToPlayer(player, "Select one from the followings:")
+        counter = 0
+        for item in list:
+            if callable:
+                printToPlayer(player, str(counter) + ". " + getattr(item, attr)())
+            else:
+                printToPlayer(player, str(counter) + ". " + getattr(item, attr))
+            counter+=1
+        try:
+            index = int(getPlayerInput(player, "Please enter the index of the desired option: "))
+            if callable:
+                printToPlayer(player, "You selected " + getattr(list[index], attr)() + "\n")
+            else:
+                printToPlayer(player, "You selected " + getattr(list[index], attr) + "\n")
+
+            return list[index]
+        except Exception:
+            printToPlayer(player, "Please enter a valid input")
 
 def printAll(players, message):
     #message += '\n'
@@ -123,6 +145,7 @@ def printToPlayer(player,message):
     #str += '\n'
 
     player.conn.sendall(str(message) + '\n')
+
     
 #main function
 if __name__ == "__main__":
@@ -149,7 +172,7 @@ if __name__ == "__main__":
         try:
             conn, addr = s.accept()
             print('connected to: '+addr[0]+':'+str(addr[1]))
-            name = getPlayerInput(conn,"Please enter your name:")
+            name = getPlayerInput(conn,"Please enter your name: ")
             players.append(Player(conn, addr, name))
 
             #conns.append(conn)
@@ -183,32 +206,73 @@ if __name__ == "__main__":
     #playerInput = getPlayerInput(players[0], "Test getPlayerInput()\n")
     #print("playerInput: " + playerInput)
 
-    characters = gameBoard.characters
+    # Assign characters to players
+    characters = copy.deepcopy(gameBoard.characters)
     for player in players:
-        while player.character == '':
-            printToPlayer(player, "Select a character from the following:")
-            charCounter = 0
-            for character in characters:
-                printToPlayer(player, str(charCounter) + ". " + character.name)
-                charCounter+=1
-            try:
-                charIdx = int(getPlayerInput(player, "Please enter the index of the character: "))
-                player.character = characters[charIdx]
-            except Exception:
-                printToPlayer(player, "Please enter a valid input")
-        del characters[charIdx]
+        # while player.character == '':
+        #     printToPlayer(player, "Select a character from the following:")
+        #     charCounter = 0
+        #     for character in characters:
+        #         printToPlayer(player, str(charCounter) + ". " + character.name)
+        #         charCounter+=1
+        #     try:
+        #         charIdx = int(getPlayerInput(player, "Please enter the index of the character: "))
+        #         player.character = characters[charIdx]
+        #     except Exception:
+        #         printToPlayer(player, "Please enter a valid input")
+        # del characters[charIdx]
 
+        char = selectFromList(player, characters, 'name', False)
+        player.character = char
+        characters.remove(char)
+
+    # Assign cards to the secret Envelope
     cardDeck = CardDeck()
     secretEnvelope = cardDeck.dealSecretEnvelope()
 
     print("secretEnvelope: " + str(secretEnvelope))
 
+    # Assign cards to players
     cardDeck.dealCards(players)
 
     for player in players:
-        printToPlayer(player, player.cards)
+        printToPlayer(player, player.cards) #show them their cards
     
 
+    # Turn
+    gameWon = False
+    playerCounter = 0
+    turnOptions = ['Make a movement', 'Make a suggestion', 'Make an accusation']
+
+    while not gameWon:
+        player = players[playerCounter]
+        
+        printToPlayer(player, player.name + ", it's your turn:")
+        # printToPlayer(player, "1. Make a movement")
+        # printToPlayer(player, "2. Make a suggestion")
+        # printToPlayer(player, "3. Make an accusation")
+        # chosenOption = str(getPlayerInput(player, "Please enter the index of the desired option.")) # Didn't incorporate Exception handling here. Please only choose 1, 2, or 3
+        chosenOption = selectFromList(player, turnOptions)
+
+
+        if chosenOption == 'Make a movement':
+            # Make a move - Waiting from Brice
+            pass
+
+        elif chosenOption == 'Make a suggestion':
+            otherPlayers = [otherPlayer for i, otherPlayer in enumerate(players) if otherPlayer != player]
+            
+            # characterCounter = 0
+            # for character in gameBoard.characters:
+            #     printToPlayer(player, character.name
+            chosenChar = selectFromList(player, gameBoard.characters, 'name', False)
+            printToPlayer(player, "chosenChar: " + chosenChar.name)
+            
+
+
+        playerCounter =  (playerCounter + 1) % len(players)
+
+    # Debugging use
     while True:
         if globalReply != '':
             print("globalReply: " + globalReply)

@@ -33,34 +33,35 @@ class BoardGUI(QtWidgets.QWidget):
     self.resize(sizeimport[0], sizeimport[1])  #size of one box is 150x150pixels
     self.setWindowTitle("Clueless")
     self.setWindowIcon(QtGui.QIcon('mag.png'))
-    self.set_background()
-    self.sizes()
-    #self.detective_notes()
-    #self.boardlayout()
+    #self.sizes()
+    self.detective_notes()
+    self.boardlayout()
     #self.player_setup()
     self.show()
 
-  def set_background(self):
-    p = self.palette()
-    p.setColor(self.backgroundRole(), Qt.gray)
-    self.setPalette(p)
+
+
+  #def set_background(self):
+  #  p = self.palette()
+  #  p.setColor(self.backgroundRole(), Qt.gray)
+  #  self.setPalette(p)
 
   def boardlayout(self):
     sizeimport = self.sizes()
     # These are all the rooms in column 1
     study = QtWidgets.QLabel(self)
     study.setGeometry(0, 0, sizeimport[3], sizeimport[3])
-    studyImg = QPixmap(os.getcwd() + './study.png').scaled(sizeimport[3], sizeimport[3])
+    studyImg = QPixmap(os.getcwd() + './Rooms/study.png').scaled(sizeimport[3], sizeimport[3])
     study.setPixmap(studyImg)
 
     hallway1 = QtWidgets.QLabel(self)
     hallway1.setGeometry(sizeimport[2], 3*sizeimport[2], sizeimport[2], sizeimport[2])
-    hallwayImg = QPixmap(os.getcwd() + './hallway_vertical.png').scaled(sizeimport[2], sizeimport[2])
+    hallwayImg = QPixmap(os.getcwd() + './Rooms/hallway_vertical.png').scaled(sizeimport[2], sizeimport[2])
     hallway1.setPixmap(hallwayImg)
 
     library = QtWidgets.QLabel(self)
     library.setGeometry(0, 4*sizeimport[2], sizeimport[3], sizeimport[3])
-    libraryImg = QPixmap(os.getcwd() + './library.png').scaled(sizeimport[3], sizeimport[3])
+    libraryImg = QPixmap(os.getcwd() + './Rooms/library.png').scaled(sizeimport[3], sizeimport[3])
     library.setPixmap(libraryImg)
 
     hallway2 = QtWidgets.QLabel(self)
@@ -69,13 +70,13 @@ class BoardGUI(QtWidgets.QWidget):
 
     conservatory = QtWidgets.QLabel(self)
     conservatory.setGeometry(0, 8*sizeimport[2], sizeimport[3], sizeimport[3])
-    conservatoryImg = QPixmap(os.getcwd() + './conservatory.png').scaled(sizeimport[3], sizeimport[3])
+    conservatoryImg = QPixmap(os.getcwd() + './Rooms/conservatory.png').scaled(sizeimport[3], sizeimport[3])
     conservatory.setPixmap(conservatoryImg)
 
     # These are all the vertical hallways between Column 1 & 2
     hallway3 = QtWidgets.QLabel(self)
     hallway3.setGeometry(3*sizeimport[2], sizeimport[2], sizeimport[2], sizeimport[2])
-    hallwayImg_v = QPixmap(os.getcwd() + './hallway_horizontal.png').scaled(sizeimport[2], sizeimport[2])
+    hallwayImg_v = QPixmap(os.getcwd() + './Rooms/hallway_horizontal.png').scaled(sizeimport[2], sizeimport[2])
     hallway3.setPixmap(hallwayImg_v)
 
     hallway4 = QtWidgets.QLabel(self)
@@ -89,7 +90,7 @@ class BoardGUI(QtWidgets.QWidget):
     # These are all the rooms in column 2
     ball = QtWidgets.QLabel(self)
     ball.setGeometry(4*sizeimport[2], 0, sizeimport[3], sizeimport[3])
-    ballImg = QPixmap(os.getcwd() + './ballroom.png').scaled(sizeimport[3], sizeimport[3])
+    ballImg = QPixmap(os.getcwd() + './Rooms/ballroom.png').scaled(sizeimport[3], sizeimport[3])
     ball.setPixmap(ballImg)
 
     hallway6 = QtWidgets.QLabel(self)
@@ -98,7 +99,7 @@ class BoardGUI(QtWidgets.QWidget):
 
     billiards = QtWidgets.QLabel(self)
     billiards.setGeometry(4*sizeimport[2], 4*sizeimport[2], sizeimport[3], sizeimport[3])
-    billiardsImg = QPixmap(os.getcwd() + './billiards_room.png').scaled(sizeimport[3], sizeimport[3])
+    billiardsImg = QPixmap(os.getcwd() + './Rooms/billiards_room.png').scaled(sizeimport[3], sizeimport[3])
     billiards.setPixmap(billiardsImg)
 
     hallway7 = QtWidgets.QLabel(self)
@@ -107,7 +108,7 @@ class BoardGUI(QtWidgets.QWidget):
 
     hall = QtWidgets.QLabel(self)
     hall.setGeometry(4*sizeimport[2], 8*sizeimport[2], sizeimport[3], sizeimport[3])
-    hallImg = QPixmap(os.getcwd() + './hall.png').scaled(sizeimport[3], sizeimport[3])
+    hallImg = QPixmap(os.getcwd() + './Rooms/hall.png').scaled(sizeimport[3], sizeimport[3])
     hall.setPixmap(hallImg)
 
     # These are all the halls between column 2 & 3
@@ -126,7 +127,7 @@ class BoardGUI(QtWidgets.QWidget):
     # These are all the rooms in column 3
     lounge = QtWidgets.QLabel(self)
     lounge.setGeometry(8*sizeimport[2], 0, sizeimport[3], sizeimport[3])
-    loungeImg = QPixmap(os.getcwd() + './lounge.png').scaled(sizeimport[3], sizeimport[3])
+    loungeImg = QPixmap(os.getcwd() + './Rooms/lounge.png').scaled(sizeimport[3], sizeimport[3])
     lounge.setPixmap(loungeImg)
 
     hallway11 = QtWidgets.QLabel(self)
@@ -135,7 +136,7 @@ class BoardGUI(QtWidgets.QWidget):
 
     dining = QtWidgets.QLabel(self)
     dining.setGeometry(8*sizeimport[2], 4*sizeimport[2], sizeimport[3], sizeimport[3])
-    diningImg = QPixmap(os.getcwd() + './dining_room.png').scaled(sizeimport[3], sizeimport[3])
+    diningImg = QPixmap(os.getcwd() + './Rooms/dining_room.png').scaled(sizeimport[3], sizeimport[3])
     dining.setPixmap(diningImg)
 
     hallway12 = QtWidgets.QLabel(self)
@@ -144,8 +145,9 @@ class BoardGUI(QtWidgets.QWidget):
 
     kitchen = QtWidgets.QLabel(self)
     kitchen.setGeometry(8*sizeimport[2], 8*sizeimport[2], sizeimport[3], sizeimport[3])
-    kitchenImg = QPixmap(os.getcwd() + './kitchen.png').scaled(sizeimport[3], sizeimport[3])
+    kitchenImg = QPixmap(os.getcwd() + './Rooms/kitchen.png').scaled(sizeimport[3], sizeimport[3])
     kitchen.setPixmap(kitchenImg)
+
 
   def player_setup(self, name, j, i):
     sizeimport = self.sizes()
@@ -153,32 +155,32 @@ class BoardGUI(QtWidgets.QWidget):
 
     if name == "Miss Scarlet":
       scarlet = QtWidgets.QLabel(self)
-      redIcon = QPixmap(os.getcwd() + './red.png').scaledToHeight(sizeimport[4])
+      redIcon = QPixmap(os.getcwd() + './Players/red.png').scaledToHeight(sizeimport[4])
       scarlet.move(p[i], p[j])
       scarlet.setPixmap(redIcon)
     if name == "Colonel Mustard":
       mustard = QtWidgets.QLabel(self)
-      brownIcon = QPixmap(os.getcwd() + './brown.png').scaledToHeight(sizeimport[4])
+      brownIcon = QPixmap(os.getcwd() + './Players/brown.png').scaledToHeight(sizeimport[4])
       mustard.move(p[i], p[j])
       mustard.setPixmap(brownIcon)
     if name == "Mrs. White":
       white = QtWidgets.QLabel(self)
-      greyIcon = QPixmap(os.getcwd() + './grey.png').scaledToHeight(sizeimport[4])
+      greyIcon = QPixmap(os.getcwd() + './Players/grey.png').scaledToHeight(sizeimport[4])
       white.move(p[i], p[j])
       white.setPixmap(greyIcon)
     if name == "Mr. Green":
       green = QtWidgets.QLabel(self)
-      greenIcon = QPixmap(os.getcwd() + './green.png').scaledToHeight(sizeimport[4])
+      greenIcon = QPixmap(os.getcwd() + './Players/green.png').scaledToHeight(sizeimport[4])
       green.move(p[i], p[j])
       green.setPixmap(greenIcon)
     if name == "Mrs. Peacock":
       peacock = QtWidgets.QLabel(self)
-      blueIcon = QPixmap(os.getcwd() + './blue.ico').scaledToHeight(sizeimport[4])
+      blueIcon = QPixmap(os.getcwd() + './Players/blue.ico').scaledToHeight(sizeimport[4])
       peacock.move(p[i], p[j])
       peacock.setPixmap(blueIcon)
     if name == "Professor Plum":
       plum = QtWidgets.QLabel(self)
-      purpleIcon = QPixmap(os.getcwd() + './purple.png').scaledToHeight(sizeimport[4])
+      purpleIcon = QPixmap(os.getcwd() + './Players/purple.png').scaledToHeight(sizeimport[4])
       plum.move(p[i], p[j])
       plum.setPixmap(purpleIcon)
 
@@ -188,32 +190,32 @@ class BoardGUI(QtWidgets.QWidget):
 
     if name == "Wrench":
       scarlet = QtWidgets.QLabel(self)
-      redIcon = QPixmap(os.getcwd() + './wrench.ico').scaledToHeight(sizeimport[4])
+      redIcon = QPixmap(os.getcwd() + './Weapons/wrench.ico').scaledToHeight(sizeimport[4])
       scarlet.move(p[i], p[j])
       scarlet.setPixmap(redIcon)
     if name == "Rope":
       mustard = QtWidgets.QLabel(self)
-      brownIcon = QPixmap(os.getcwd() + './Rope.ico').scaledToHeight(sizeimport[4])
+      brownIcon = QPixmap(os.getcwd() + './Weapons/Rope.ico').scaledToHeight(sizeimport[4])
       mustard.move(p[i], p[j])
       mustard.setPixmap(brownIcon)
     if name == "Revolver":
       white = QtWidgets.QLabel(self)
-      greyIcon = QPixmap(os.getcwd() + './revolver.ico').scaledToHeight(sizeimport[4])
+      greyIcon = QPixmap(os.getcwd() + './Weapons/revolver.ico').scaledToHeight(sizeimport[4])
       white.move(p[i], p[j])
       white.setPixmap(greyIcon)
     if name == "knife":
       green = QtWidgets.QLabel(self)
-      greenIcon = QPixmap(os.getcwd() + './knife.ico').scaledToHeight(sizeimport[4])
+      greenIcon = QPixmap(os.getcwd() + './Weapons/knife.ico').scaledToHeight(sizeimport[4])
       green.move(p[i], p[j])
       green.setPixmap(greenIcon)
     if name == "Candlestick":
       peacock = QtWidgets.QLabel(self)
-      blueIcon = QPixmap(os.getcwd() + './candlestick.ico').scaledToHeight(sizeimport[4])
+      blueIcon = QPixmap(os.getcwd() + './Weapons/candlestick.ico').scaledToHeight(sizeimport[4])
       peacock.move(p[i], p[j])
       peacock.setPixmap(blueIcon)
     if name == "Lead Pipe":
       plum = QtWidgets.QLabel(self)
-      purpleIcon = QPixmap(os.getcwd() + './pipe.ico').scaledToHeight(sizeimport[4])
+      purpleIcon = QPixmap(os.getcwd() + './Weapons/pipe.ico').scaledToHeight(sizeimport[4])
       plum.move(p[i], p[j])
       plum.setPixmap(purpleIcon)
 
@@ -335,3 +337,10 @@ class BoardGUI(QtWidgets.QWidget):
 
     notes.setLayout(vbox)
 
+'''
+if __name__ == '__main__':
+  app = QtWidgets.QApplication(sys.argv)
+  gameBoardGUI = BoardGUI()
+  gameBoardGUI.init_ui()
+  app.exec_()
+'''

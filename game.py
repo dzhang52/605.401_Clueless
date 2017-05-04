@@ -42,11 +42,7 @@ class BoardSpace(object):
     connection.connectedTo[Direction.opposite(position)] = self
 
   def asSymbol(self):
-    #self.QtWidgets.QLabel(self)
-    #purpleIcon = QPixmap(os.getcwd() + './purple.png').scaledToHeight(100)
-    #self.setPixmap(purpleIcon)
-    #return self
-    return "X"
+    return "x"
 
   def addBoardObject(self, boardObject):
     self.boardObjects.append(boardObject)
@@ -101,8 +97,6 @@ class BoardObject(object):
     self.symbol = symbol
     self.position = position
 
-
-
   def setPosition(self, position):
     self.position = position
 
@@ -141,11 +135,7 @@ class GameBoard(object):
   #             print item
 
   def printBoard(self):
-    print('\n'.join([''.join(['{:2}'.format(item.asSymbol()) for item in row]) for row in self.board]))
-
-
-
-
+    return '\n'.join([''.join(['{:2}'.format(item.asSymbol()) for item in row]) for row in self.board])
 
   def concatenateMatrices(self, *matrices):
     # rowNum = 0
@@ -260,6 +250,7 @@ class GameBoard(object):
 
     self.discardedObj = {}
 
+    # self.board[0][2] = scarlet
     self.addBoardObject(mustard, [3, 9])
     self.addBoardObject(scarlet, [1, 7])
     self.addBoardObject(plum, [3, 1])
@@ -283,8 +274,8 @@ class GameBoard(object):
     self.discardedObj[positionString] = originalObj
     self.board[position[0]][position[1]] = boardObject
     boardObject.setPosition(position)
-    game.player_setup(str(boardObject.getName()), position[0], position[1])                                       #Added to drop player locations
-    game.weapon_setup(str(boardObject.getName()), position[0], position[1])                                       #Added to drop player locations
+
+
 
   def delBoardObject(self, boardObject):
     position = boardObject.position
@@ -313,11 +304,7 @@ class GameBoard(object):
 
 
 if __name__ == '__main__':
-  app = QtWidgets.QApplication(sys.argv)
-  game = BoardGUI()
-  game.size()
-  game.boardlayout()
-  game.detective_notes()
+
   gameBoard = GameBoard()
   gameBoard.initialize()
   gameBoard.printBoard()
@@ -325,17 +312,13 @@ if __name__ == '__main__':
   gameBoard.discardedObj
   print
   gameBoard.hallways[2].boardObjects
-  game.init_ui()
-  app.exec_()
 
+
+
+  print(gameBoard.printBoard())
+  print(gameBoard.discardedObj)
+  print("discardedObj length: " + str(len(gameBoard.discardedObj)))
+  print(gameBoard.hallways[2].boardObjects)
 
   charEx = Character("Colonel Mustant", "M")
-  print
-  charEx.asSymbol()
-  # gameBoard.test()
-  # roomEx = Room()
-  # roomBoard = roomEx.asSymbol()
-  # print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in roomBoard]))
-
-  # hallwayEx = Hallway()
-  # print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in hallwayEx.asSymbol()]))
+  print(charEx.asSymbol())

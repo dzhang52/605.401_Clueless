@@ -2,7 +2,10 @@
 import socket, select, string, sys, os, errno
 import threading
 from thread import *
+
+import newGame
 from BoardGUI import *
+from newGame import *
 
 
 def threaded_inputListener(conn):
@@ -23,13 +26,11 @@ def threaded_inputListener(conn):
 
 # main function
 if __name__ == "__main__":
+  app = QApplication(sys.argv)
 
-  if (len(sys.argv) < 3):
-    print('Usage : python telnet.py hostname port')
-    sys.exit()
 
-  host = sys.argv[1]
-  port = int(sys.argv[2])
+  host = "127.0.0.1"
+  port = 5555
 
   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
   # s.settimeout(2)
@@ -47,10 +48,18 @@ if __name__ == "__main__":
   start_new_thread(threaded_inputListener, (s,))  # python2
 
   while True:
-    app = QtWidgets.QApplication(sys.argv)
-    gameBoardGUI = BoardGUI()
-    gameBoardGUI.init_ui()
+
+    ex = newGame.startup()
+    ex.show()
     app.exec_()
+    print(ex.name_assignment())
+    print(ex.player_assignment())
+    print(ex.res_assignment())
+    print("Start Game")
+    #app = QtWidgets.QApplication(sys.argv)
+    #gameBoardGUI = BoardGUI()
+    #gameBoardGUI.init_ui()
+    #app.exec_()
 
     '''
         socket_list = [sys.stdin, s]
@@ -75,5 +84,6 @@ if __name__ == "__main__":
                 s.send(msg)
         '''
 
-    msg = sys.stdin.readline()
+    msg = str(ex.name_assignment() +"--"+ ex.player_assignment() + "--Start Game")
+    #msg = sys.stdin.readline()
     s.send(msg)

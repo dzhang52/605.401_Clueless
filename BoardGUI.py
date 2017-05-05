@@ -3,14 +3,6 @@ from PySide.QtCore import Qt, SIGNAL, SLOT, QObject
 from PySide.QtGui import QPixmap, QDialog, QPushButton, QAction, QCheckBox, QComboBox, QLabel, QVBoxLayout, QGridLayout, QHBoxLayout, QDialogButtonBox
 from qtpy import QtWidgets, QtGui, QtCore
 
-'''
-    comboBox = QComboBox(self)
-    comboBox.addItem("1150x715")
-    comboBox.addItem("1325x825")
-    comboBox.addItem("1750x1100")
-    comboBox.addItem("2010x1375")
-    comboBox.addItem("2650x1650")
-'''
 
 class BoardGUI(QtWidgets.QWidget):
 

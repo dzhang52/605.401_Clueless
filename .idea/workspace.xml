@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/BoardGUIv2.py" line="59" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="dcc8f06d-674e-4882-95d1-f5df8c45791d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cardsDisplay.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Cards/NotUsed/Characters.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Cards/NotUsed/DetectiveNotes.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Cards/NotUsed/all.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Cards/NotUsed/characters3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Cards/NotUsed/currentVersion.PNG" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Cards/NotUsed/room3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Cards/NotUsed/room4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Cards/NotUsed/weapon2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Cards/NotUsed/weapons5.jpg" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BoardGUIv2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/telnetClient.py" afterPath="$PROJECT_DIR$/telnetClient.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cardsDisplay.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cardsDisplay.py">
+      <file leaf-file-name="BoardGUI.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BoardGUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1650">
-              <caret line="50" column="12" lean-forward="false" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
+            <state relative-caret-position="1419">
+              <caret line="43" column="23" lean-forward="true" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -64,33 +57,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="player.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/player.py">
+      <file leaf-file-name="BoardGUIv2.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BoardGUIv2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cards.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cards.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="33">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BoardGUI.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BoardGUI.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7528">
-              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="72" />
+            <state relative-caret-position="597">
+              <caret line="358" column="20" lean-forward="true" selection-start-line="358" selection-start-column="20" selection-end-line="358" selection-end-column="20" />
               <folding>
-                <element signature="e#0#14#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,9 +72,23 @@
       <file leaf-file-name="newGame.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/newGame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="15" column="82" lean-forward="false" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="82" />
-              <folding />
+            <state relative-caret-position="494">
+              <caret line="15" column="69" lean-forward="false" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="69" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cardsDisplay.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cardsDisplay.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="891">
+              <caret line="27" column="35" lean-forward="true" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,9 +111,15 @@
       <find>connected to:</find>
       <find>terminat</find>
       <find>qt</find>
+      <find>lbl1</find>
+      <find>imagemap11</find>
+      <find>qlabelplus(self, unit)</find>
     </findStrings>
     <replaceStrings>
       <replace>BOARD</replace>
+      <replace>stud</replace>
+      <replace>h_vt</replace>
+      <replace>QLabelplus(self)</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -157,6 +150,8 @@
         <option value="$PROJECT_DIR$/telnetClient.py" />
         <option value="$PROJECT_DIR$/BoardGUI.py" />
         <option value="$PROJECT_DIR$/cardsDisplay.py" />
+        <option value="$PROJECT_DIR$/testing.py" />
+        <option value="$PROJECT_DIR$/BoardGUIv2.py" />
       </list>
     </option>
   </component>
@@ -214,6 +209,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clueless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clueless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rooms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -247,8 +256,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.cardsDisplay">
-    <configuration default="false" name="socketServer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.BoardGUIv2">
+    <configuration default="false" name="cardsDisplay" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -260,7 +269,43 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="clueless" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/socketServer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cardsDisplay.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="testing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="clueless" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="BoardGUIv2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="clueless" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BoardGUIv2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -284,7 +329,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="telnetClient" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="telnetClientGUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -296,43 +341,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="clueless" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/telnetClient.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="BoardGUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="clueless" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BoardGUI.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="cardsDisplay" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="clueless" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cardsDisplay.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/telnetClientGUI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -403,19 +412,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.socketServer" />
-      <item index="1" class="java.lang.String" itemvalue="Python.socketServerGUItest" />
-      <item index="2" class="java.lang.String" itemvalue="Python.telnetClient" />
-      <item index="3" class="java.lang.String" itemvalue="Python.BoardGUI" />
-      <item index="4" class="java.lang.String" itemvalue="Python.cardsDisplay" />
+      <item index="0" class="java.lang.String" itemvalue="Python.cardsDisplay" />
+      <item index="1" class="java.lang.String" itemvalue="Python.testing" />
+      <item index="2" class="java.lang.String" itemvalue="Python.BoardGUIv2" />
+      <item index="3" class="java.lang.String" itemvalue="Python.socketServerGUItest" />
+      <item index="4" class="java.lang.String" itemvalue="Python.telnetClientGUI" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.cardsDisplay" />
-        <item index="1" class="java.lang.String" itemvalue="Python.telnetClient" />
-        <item index="2" class="java.lang.String" itemvalue="Python.socketServer" />
-        <item index="3" class="java.lang.String" itemvalue="Python.BoardGUI" />
-        <item index="4" class="java.lang.String" itemvalue="Python.socketServerGUItest" />
+        <item index="0" class="java.lang.String" itemvalue="Python.BoardGUIv2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.telnetClientGUI" />
+        <item index="2" class="java.lang.String" itemvalue="Python.socketServerGUItest" />
+        <item index="3" class="java.lang.String" itemvalue="Python.testing" />
+        <item index="4" class="java.lang.String" itemvalue="Python.cardsDisplay" />
       </list>
     </recent_temporary>
   </component>
@@ -443,8 +452,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3866" height="2106" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17916666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08567708" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292876" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298153" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -494,21 +504,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BoardQT-obsolete.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cards.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/carddeck.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-18979">
@@ -606,7 +601,7 @@
         <state relative-caret-position="495">
           <caret line="15" column="82" lean-forward="false" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="82" />
           <folding>
-            <element signature="e#0#10#0" expanded="false" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -758,34 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/telnetClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/newGame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="15" column="82" lean-forward="false" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BoardGUI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7528">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="72" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/player.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -802,12 +769,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/telnetClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cardsDisplay.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="50" column="12" lean-forward="false" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
+        <state relative-caret-position="891">
+          <caret line="27" column="35" lean-forward="true" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoardGUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1419">
+          <caret line="43" column="23" lean-forward="true" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2046">
+          <caret line="62" column="42" lean-forward="false" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/newGame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="15" column="69" lean-forward="false" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoardGUIv2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="358" column="20" lean-forward="true" selection-start-line="358" selection-start-column="20" selection-end-line="358" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>

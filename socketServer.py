@@ -15,49 +15,49 @@ count = 0
 #q = Queue()
 queueLock = threading.Lock()
 
-class threadedClient(threading.Thread):
-    def __init__(self, threadID, name, conn, addr):
-        threading.Thread.__init__(self)
-        self.threadID = threadID
-        self.name = name
+# class threadedClient(threading.Thread):
+#     def __init__(self, threadID, name, conn, addr):
+#         threading.Thread.__init__(self)
+#         self.threadID = threadID
+#         self.name = name
 
-        global globalReply
-        global count
+#         global globalReply
+#         global count
 
-    def run(self):
-        print("Starting " + self.name)
+#     def run(self):
+#         print("Starting " + self.name)
 
-        # main part of the method
-        conn.send('Welcome, type your info\n')
-        conn.send('There are ' + str(count) + ' player(s) in the game')
+#         # main part of the method
+#         conn.send('Welcome, type your info\n')
+#         conn.send('There are ' + str(count) + ' player(s) in the game')
         
 
-        while True:
-            try:
-                data = conn.recv(4096)
-                queueLock.acquire()
-                globalReply = 'Server: '+ data
-                queueLock.release()
-                if not data:
-                    print('Connection closed')
-                    break
-                conn.sendall(globalReply)
-                print('Request from ' + str(addr[0]) + ':' + str(addr[1]) + ':' + data)
-            except socket.error as e:
-                if e.errno == errno.WSAECONNRESET:
-                    print('A player has left')
-                    quit()
+#         while True:
+#             try:
+#                 data = conn.recv(4096)
+#                 queueLock.acquire()
+#                 globalReply = 'Server: '+ data
+#                 queueLock.release()
+#                 if not data:
+#                     print('Connection closed')
+#                     break
+#                 conn.sendall(globalReply)
+#                 print('Request from ' + str(addr[0]) + ':' + str(addr[1]) + ':' + data)
+#             except socket.error as e:
+#                 if e.errno == errno.WSAECONNRESET:
+#                     print('A player has left')
+#                     quit()
             
         
-        print('Connection closing')
-        conn.close()
-        # end of the main part of the method
+#         print('Connection closing')
+#         conn.close()
+#         # end of the main part of the method
 
-        print("Exiting " + self.name)
+#         print("Exiting " + self.name)
         
 
 
-def threaded_client(conn, addr):
+def listeningToClient(conn, addr):
     conn.send("Welcome. To start a game, type 'Start Game'\n")
 
     global globalReply
@@ -84,7 +84,7 @@ def threaded_client(conn, addr):
     count-=1
     queueLock.release()
 
-    print('Terminating threaded_client for ' + str(addr[0]) + ':' + str(addr[1]) + '.\n')
+    print('Terminating listeningToClient for ' + str(addr[0]) + ':' + str(addr[1]) + '.\n')
 
     if count == 0:
         queueLock.acquire()
@@ -178,8 +178,8 @@ if __name__ == "__main__":
             #conns.append(conn)
             #addrs.append(addr)
 
-            #threading.Thread(target=threaded_client, args=(conn,addr,)).start() #python3
-            start_new_thread(threaded_client,(conn,addr,)) #python2
+            #threading.Thread(target=listeningToClient, args=(conn,addr,)).start() #python3
+            start_new_thread(listeningToClient,(conn,addr,)) #python2
             #thread = threadedClient(count, "Thread-" + str(count), conn, addr)
             count += 1
             print("There are %d player(s) in the game" % count)
@@ -325,6 +325,7 @@ if __name__ == "__main__":
                     playerCounter =  (playerCounter + 1) % len(players)
                     player.madeAccusation = True
                     
+                    # Check how many left in the game
                     accusationsMadeCounter = 1
                     for otherPlayer in otherPlayers:
                         if otherPlayer.madeAccusation:

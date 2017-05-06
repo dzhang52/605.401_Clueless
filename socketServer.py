@@ -185,9 +185,6 @@ if __name__ == "__main__":
   gameBoard.initialize()
   printAll(players, gameBoard.printBoard())
 
-  # playerInput = getPlayerInput(players[0], "Test getPlayerInput()\n")
-  # print("playerInput: " + playerInput)
-
   characters = gameBoard.characters
   for player in players:
     while player.character == '':
@@ -216,6 +213,4 @@ if __name__ == "__main__":
   while True:
     if globalReply != '':
       print("globalReply: " + globalReply)
-      # sys.stdout.flush()
       globalReply = ''
-      # print "not listening anymore"

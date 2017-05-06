@@ -66,7 +66,7 @@ class startup(QWidget):
     return self.name.text()
 
   def player_assignment(self):
-    return self.cbplayer.currentText()
+    return str(self.cbplayer.currentIndex())
 
   def res_assignment(self):
     return [int(self.cb.currentText().split("x")[0]), int(self.cb.currentText().split("x")[1])]

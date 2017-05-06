@@ -56,7 +56,7 @@ class threadedClient(threading.Thread):
 
 
 def threaded_client(conn, addr):
-  #conn.send("Welcome. To start a game, type 'Start Game'\n")
+  conn.send("Welcome. To start a game, type 'Start Game'\n")
 
   global globalReply
   global count
@@ -88,46 +88,92 @@ def threaded_client(conn, addr):
     queueLock.acquire()
     globalReply = "Starting Game"
     queueLock.release()
+    # print('Connection closing')
+    # conn.close()
 
 
-def getPlayerInput(firstArg):
+def getPlayerInput(firstArg, message):
   if hasattr(firstArg, 'conn'):
     conn = firstArg.conn
   else:
     conn = firstArg
 
-  #conn.send(message)
+  conn.send(message)
   conn.setblocking(1)
   data = conn.recv(4096)
   return data
+  # try:
+  #     data = conn.recv(4096)
+  # except socket.error as e:
+  #         if e.errno == errno.WSAECONNRESET:
+  #             print('An error occured in getPlayerInput()')
+
   print("End of getPlayerInput")
 
 
 def printAll(players, message):
+  # message += '\n'
+
   for player in players:
     player.conn.sendall(str(message) + '\n')
+
   print(message)
 
 
 def printToPlayer(player, message):
+  # str += '\n'
+
   player.conn.sendall(str(message) + '\n')
 
 
 # main function
 if __name__ == "__main__":
+
   host = ''
   port = 5555
   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
   try:
     s.bind((host, port))
   except socket.error as e:
     print(str(e))
+
   s.settimeout(0.05)
   s.listen(6)
   print('Waiting for connections.')
+
   conns = []
   addrs = []
   players = []
+
+
+
+
+  # q.put(globalReply)
+  while count < 6 and "Starting Game" not in globalReply:
+    try:
+      conn, addr = s.accept()
+      print('connected to: ' + addr[0] + ':' + str(addr[1]))
+      name = getPlayerInput(conn, "Please enter your name:")
+      players.append(Player(conn, addr, name))
+
+      # conns.append(conn)
+      # addrs.append(addr)
+
+      # threading.Thread(target=threaded_client, args=(conn,addr,)).start() #python3
+      start_new_thread(threaded_client, (conn, addr,))  # python2
+      # thread = threadedClient(count, "Thread-" + str(count), conn, addr)
+      count += 1
+      print("There are %d player(s) in the game" % count)
+      # thread.start()
+
+    except socket.error as e:
+      pass
+
+  globalReply = "End child processes"
+
+  while count != 0:
+    pass
 
   queueLock.acquire()
   globalReply = ''
@@ -137,35 +183,28 @@ if __name__ == "__main__":
 
   gameBoard = GameBoard()
   gameBoard.initialize()
-  characters = gameBoard.characters
-
-  while count < 6 and "Starting Game" not in globalReply:
-    try:
-      conn, addr = s.accept()
-      print('connected to: ' + addr[0] + ':' + str(addr[1]))
-      while len(players) < 6:
-        guiinput = getPlayerInput(conn)
-        players.append(Player(conn, addr, guiinput.split("--")[0], guiinput.split("--")[1]))
-        start_new_thread(threaded_client, (conn, addr,))  # python2
-        #
-        print("There are %d player(s) in the game" % (count+1))
-        print(players[count].name)
-        count += 1
-    except socket.error as e:
-      pass
-
-  globalReply = "End child processes"
-
-  while count != 0:
-    pass
-
-
   printAll(players, gameBoard.printBoard())
 
+  characters = gameBoard.characters
+  for player in players:
+    while player.character == '':
+      printToPlayer(player, "Select a character from the following:")
+      charCounter = 0
+      for character in characters:
+        printToPlayer(player, str(charCounter) + ". " + character.name)
+        charCounter += 1
+      try:
+        charIdx = int(getPlayerInput(player, "Please enter the index of the character: "))
+        player.character = characters[charIdx]
+      except Exception:
+        printToPlayer(player, "Please enter a valid input")
+    del characters[charIdx]
 
   cardDeck = CardDeck()
   secretEnvelope = cardDeck.dealSecretEnvelope()
+
   print("secretEnvelope: " + str(secretEnvelope))
+
   cardDeck.dealCards(players)
 
   for player in players:

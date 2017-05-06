@@ -1,4 +1,5 @@
-from random import shuffle
+#from random import shuffle
+import random
 
 # Wrapper class to add asSymbol method for strings
 class String(str):
@@ -31,13 +32,18 @@ class BoardSpace(object):
         self.width = width
         self.name = name
         self.position = position
-        self.connectedTo = [None, None, None, None] #[left, up, right, down]
+        self.connectedTo = [None, None, None, None, None] #[left, up, right, down, secretPassage]
         self.boardObjects = []
         #print "in boardspace"
 
     def addConnection(self, position, connection):
         self.connectedTo[position] = connection
         connection.connectedTo[Direction.opposite(position)] = self
+
+    @staticmethod
+    def addSecretPassage(connection01, connection02):
+        connection01.connectedTo[4] = connection02
+        connection02.connectedTo[4] = connection01
 
     def asSymbol(self):
         return "x"
@@ -46,6 +52,7 @@ class BoardSpace(object):
         self.boardObjects.append(boardObject)
 
     def delBoardObject(self, boardObject):
+        print("self.boardObjects[0]: " + self.boardObjects[0].name)
         self.boardObjects.remove(boardObject)
 
 
@@ -161,7 +168,7 @@ class GameBoard(object):
 
         rope = Weapon("Rope", "R")
         pipe = Weapon("Lead Pipe", "L")
-        knife = Weapon("knife", "K")
+        knife = Weapon("Knife", "K")
         wrench = Weapon("Wrench", "H")
         candlestick = Weapon("Candlestick", "C")
         revolver = Weapon("Revolver", "R")
@@ -228,6 +235,10 @@ class GameBoard(object):
         kitchen.addConnection(Direction.left, hallway12)
         kitchen.addConnection(Direction.up, hallway10)
 
+        # secret passage
+        BoardSpace.addSecretPassage(study, kitchen)
+        BoardSpace.addSecretPassage(lounge, conservatory)
+
         for room in self.rooms:
             room.initializeMatrix()
 
@@ -256,41 +267,90 @@ class GameBoard(object):
 
     def randomRooms(self):
         randomRooms = self.rooms
-        shuffle(randomRooms)
+        random.shuffle(randomRooms)
         return randomRooms
 
     def addBoardObject(self, boardObject, position):
         positionString = str(position[0]) + "," + str(position[1])
         originalObj = self.board[position[0]][position[1]]
         originalObj.addBoardObject(boardObject)
+        #print(originalObj.name + " has boardobjects: " + str(originalObj.boardObjects[0].name))
         self.discardedObj[positionString] = originalObj
         self.board[position[0]][position[1]] = boardObject
         boardObject.setPosition(position)
 
     def delBoardObject(self, boardObject):
+        #print("boardObject in GameBoard.delBoardObject(): " + boardObject.name)
         position = boardObject.position
         positionString = str(position[0]) + "," + str(position[1])
         originalObj = self.discardedObj[positionString]
+        #print(originalObj.name + " has boardobjects: " + str(originalObj.boardObjects[0].name))
         originalObj.delBoardObject(boardObject)
         self.board[position[0]][position[1]] = originalObj
         del self.discardedObj[positionString]
 
-    def translatePosition(self,position):
-        if (position[0]==3 or position[0]==7):
-            return [1,0]
-        elif (position[0]>=4 and position[0]<=6):
-            position[0]-=4
-        elif (position[0]>=8 and position[0]<=10):
-            position[0]-=8
-        
-        if (position[1]==3 or position[1]==7):
-            return [0,1]
-        elif (position[1]>=4 and position[1]<=6):
-            position[1]-=4
-        elif (position[1]>=8 and position[1]<=10):
-            position[1]-=8
+    def moveBoardObject(self, boardObject, position):
+        self.delBoardObject(boardObject)
+        self.addBoardObject(boardObject, position)
 
-        return position
+    def moveToARoom(self, boardObject, room):
+        roomPosition = room.position
+
+        availableSpace = []
+        for row in range(roomPosition[0]-1, roomPosition[0]+1):
+            for col in range(roomPosition[1]-1, roomPosition[1]+1):
+                boardSpace = self.board[row][col]
+                if isinstance(boardSpace, Room):
+                    availableSpace.append([row, col])
+        
+        self.moveBoardObject(boardObject, random.choice(availableSpace))
+
+
+    # def translatePosition(self,position):
+    #     if (position[0]==3 or position[0]==7):
+    #         return [1,0]
+    #     elif (position[0]>=4 and position[0]<=6):
+    #         position[0]-=4
+    #     elif (position[0]>=8 and position[0]<=10):
+    #         position[0]-=8
+        
+    #     if (position[1]==3 or position[1]==7):
+    #         return [0,1]
+    #     elif (position[1]>=4 and position[1]<=6):
+    #         position[1]-=4
+    #     elif (position[1]>=8 and position[1]<=10):
+    #         position[1]-=8
+
+    #     return position
+
+    def getRoomByPosition(self, position):
+        objectAtPosition = self.board[position[0]][position[1]]
+        if isinstance(objectAtPosition, BoardObject):
+            positionString = str(position[0]) + "," + str(position[1])
+            #print("getRoomByPosition: " + str(self.discardedObj[positionString]))
+            return self.discardedObj[positionString]
+        else:
+            return objectAtPosition
+
+    def validateMove(self, boardObject, targetedPosition):
+        # check if targetedPosition is within the board dimensions 
+        if targetedPosition[0] >= len(self.board) and targetedPosition[0] < 0:
+            return False
+
+        if targetedPosition[1] >= len(self.board[0]) and targetedPosition[1] < 0:
+            return False
+
+        # check if the position is occupied
+        originalBoardSpace = self.getRoomByPosition(boardObject.position)
+        ObjectAtTargetedPosition = self.board[targetedPosition[0]][targetedPosition[1]]
+        
+        if ObjectAtTargetedPosition not in originalBoardSpace.connectedTo and ObjectAtTargetedPosition != originalBoardSpace:
+            return False
+        
+
+        return True
+
+
 
 if __name__ == '__main__':
     gameBoard = GameBoard()

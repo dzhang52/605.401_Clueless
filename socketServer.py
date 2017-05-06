@@ -145,8 +145,8 @@ def printToPlayer(player,message):
     #str += '\n'
 
     player.conn.sendall(str(message) + '\n')
-
     
+
 #main function
 if __name__ == "__main__":
 
@@ -172,7 +172,7 @@ if __name__ == "__main__":
         try:
             conn, addr = s.accept()
             print('connected to: '+addr[0]+':'+str(addr[1]))
-            name = getPlayerInput(conn,"Please enter your name: ")
+            name = getPlayerInput(conn,"Please enter your name: ").strip()
             players.append(Player(conn, addr, name))
 
             #conns.append(conn)
@@ -201,7 +201,7 @@ if __name__ == "__main__":
 
     gameBoard = GameBoard()
     gameBoard.initialize()
-    printAll(players, gameBoard.printBoard())
+    printAll(players, gameBoard.printBoard() + "\n")
 
     #playerInput = getPlayerInput(players[0], "Test getPlayerInput()\n")
     #print("playerInput: " + playerInput)
@@ -209,21 +209,12 @@ if __name__ == "__main__":
     # Assign characters to players
     characters = copy.deepcopy(gameBoard.characters)
     for player in players:
-        # while player.character == '':
-        #     printToPlayer(player, "Select a character from the following:")
-        #     charCounter = 0
-        #     for character in characters:
-        #         printToPlayer(player, str(charCounter) + ". " + character.name)
-        #         charCounter+=1
-        #     try:
-        #         charIdx = int(getPlayerInput(player, "Please enter the index of the character: "))
-        #         player.character = characters[charIdx]
-        #     except Exception:
-        #         printToPlayer(player, "Please enter a valid input")
-        # del characters[charIdx]
 
         char = selectFromList(player, characters, 'name', False)
-        player.character = char
+        for originalChar in gameBoard.characters:
+            if originalChar.name == char.name:
+                player.character = originalChar
+                break
         characters.remove(char)
 
     # Assign cards to the secret Envelope
@@ -242,41 +233,122 @@ if __name__ == "__main__":
     # Turn
     gameWon = False
     playerCounter = 0
-    turnOptions = ['Make a movement', 'Make a suggestion', 'Make an accusation']
+    turnOptions = ['Make a movement', 'Make a suggestion', 'Make an accusation', 'End turn']
 
     while not gameWon:
         player = players[playerCounter]
-        
-        printToPlayer(player, player.name + ", it's your turn:")
-        # printToPlayer(player, "1. Make a movement")
-        # printToPlayer(player, "2. Make a suggestion")
-        # printToPlayer(player, "3. Make an accusation")
-        # chosenOption = str(getPlayerInput(player, "Please enter the index of the desired option.")) # Didn't incorporate Exception handling here. Please only choose 1, 2, or 3
-        chosenOption = selectFromList(player, turnOptions)
-
-
-        if chosenOption == 'Make a movement':
-            # Make a move - Waiting from Brice
-            pass
-
-        elif chosenOption == 'Make a suggestion':
+        if player.madeAccusation:
+            playerCounter =  (playerCounter + 1) % len(players) #skip the player
+        else:
             otherPlayers = [otherPlayer for i, otherPlayer in enumerate(players) if otherPlayer != player]
-            
-            # characterCounter = 0
-            # for character in gameBoard.characters:
-            #     printToPlayer(player, character.name
-            chosenChar = selectFromList(player, gameBoard.characters, 'name', False)
-            printToPlayer(player, "chosenChar: " + chosenChar.name)
-            
+
+            printToPlayer(player, player.name + ", it's your turn:")
+            # printToPlayer(player, "1. Make a movement")
+            # printToPlayer(player, "2. Make a suggestion")
+            # printToPlayer(player, "3. Make an accusation")
+            # chosenOption = str(getPlayerInput(player, "Please enter the index of the desired option.")) # Didn't incorporate Exception handling here. Please only choose 1, 2, or 3
+            chosenOption = selectFromList(player, turnOptions)
 
 
-        playerCounter =  (playerCounter + 1) % len(players)
+            if chosenOption == 'Make a movement':
+                if player.madeMovement:
+                    printToPlayer(player, "You already made a move during this turn.")
+                else:
+                    targetedPosition = [-1, -1]
+                    while not gameBoard.validateMove(player.character, targetedPosition):
+                        targetedPositionString = getPlayerInput(player, "Please enter a valid desired position to move your character to in the following format: row,col\n")
+                        targetedPosition = targetedPositionString.split(",")
+                        for axis in range(len(targetedPosition)):
+                            targetedPosition[axis] = int(targetedPosition[axis])
+                        
+                    gameBoard.moveBoardObject(player.character, targetedPosition)
+                    printAll(players, gameBoard.printBoard() + "\n")
 
+                    player.madeMovement = True
+
+
+            elif chosenOption == 'Make a suggestion':
+                if player.madeSuggestion:
+                    printToPlayer(player, "You already made a suggestion during this turn.")
+                elif isinstance(gameBoard.getRoomByPosition(player.character.position), Hallway):
+                    printToPlayer(player, "You can only make a suggestion when you are in a room.")
+                else:
+                    # characterCounter = 0
+                    # for character in gameBoard.characters:
+                    #     printToPlayer(player, character.name
+                    printToPlayer(player, "Pick a character")
+                    chosenChar = selectFromList(player, gameBoard.characters, 'name', False)
+                    printToPlayer(player, "Pick a weapon")
+                    chosenWeapon = selectFromList(player, gameBoard.weapons, 'name', False)
+                    chosenRoom = gameBoard.getRoomByPosition(player.character.position)
+                    suggestion = [chosenChar.name, chosenWeapon.name, chosenRoom.name]
+                    
+
+                    # move(chosenChar, chosenRoom)
+                    if chosenChar not in chosenRoom.boardObjects:
+                        gameBoard.moveToARoom(chosenChar, chosenRoom)
+                    # move(chosenWeapon, chosenRoom)
+                    if chosenWeapon not in chosenRoom.boardObjects:
+                        gameBoard.moveToARoom(chosenWeapon, chosenRoom)
+
+                    printAll(players, gameBoard.printBoard() + "\n")
+                    printAll(players, player.name + " made the following suggestion: " + str(suggestion))
+
+                    for otherPlayer in otherPlayers:
+                        # Check if otherPlayer has any of the objects
+                        commonObjects = []
+                        for chosenObject in suggestion:
+                            if chosenObject in otherPlayer.cards:
+                                commonObjects.append(chosenObject)
+
+                        if commonObjects:
+                            printToPlayer(otherPlayer, player.name + " chose the following suggestion: " + str(suggestion))
+                            chosenCardToShow = selectFromList(otherPlayer, commonObjects)
+                            printToPlayer(player, otherPlayer.name + " shows you this card: " + chosenCardToShow)
+                            break
+
+                        printToPlayer(player, "No one could prove your suggestion was wrong!")
+
+                    player.madeSuggestion = True
+
+            elif chosenOption == "Make an accusation":
+                chosenChar = selectFromList(player, gameBoard.characters, 'name', False)
+                chosenWeapon = selectFromList(player, gameBoard.weapons, 'name', False)
+                chosenRoom = selectFromList(player, gameBoard.rooms, 'name', False)
+                accusation = [chosenChar.name, chosenWeapon.name, chosenRoom.name]
+
+                if len(set(accusation) & set(secretEnvelope)) == 3:
+                    printToPlayer(player, "Your accusation was correct! You won the game!! YAY!!!")
+                    gameWon = True
+                else:
+                    printToPlayer(player, "Your accusation was incorrect! Sorry")
+                    playerCounter =  (playerCounter + 1) % len(players)
+                    player.madeAccusation = True
+                    
+                    accusationsMadeCounter = 1
+                    for otherPlayer in otherPlayers:
+                        if otherPlayer.madeAccusation:
+                            accusationsMadeCounter += 1
+                        else:
+                            playerWon = otherPlayer
+
+                    if accusationsMadeCounter >= len(players)-1:
+                        printToPlayer(playerWon, "You are the last one standing. You won the game!")
+                        gameWon = True
+
+
+
+                #printToPlayer(player, "chosenChar: " + chosenChar.name)
+            elif chosenOption == "End turn":
+                playerCounter =  (playerCounter + 1) % len(players)
+                player.refresh()
+
+    printAll(players, "Ending game")
     # Debugging use
-    while True:
-        if globalReply != '':
-            print("globalReply: " + globalReply)
-            #sys.stdout.flush()
-            globalReply = ''
-        #print "not listening anymore"
+    # while True:
+    #     if globalReply != '':
+    #         print("globalReply: " + globalReply)
+    #         #sys.stdout.flush()
+    #         globalReply = ''
+    # print "not listening anymore"
             

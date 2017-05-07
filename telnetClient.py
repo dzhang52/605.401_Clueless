@@ -69,4 +69,5 @@ if __name__ == "__main__":
         '''
 
         msg = sys.stdin.readline()
+        print msg
         s.send(msg)

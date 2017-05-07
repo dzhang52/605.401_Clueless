@@ -140,6 +140,20 @@ class GameBoard(object):
     def printBoard(self):
         return '\n'.join([''.join(['{:2}'.format(item.asSymbol()) for item in row]) for row in self.board])
 
+    def sendCharPositions(self):
+        charPositionsString = ""
+        for char in self.characters:
+            charPositionsString += char.name + ":" + str(char.position[0]) + "," + str(char.position[1])  + ";"
+
+        return charPositionsString
+
+    def sendWeaponPositions(self):
+        weaponPositionsString = ""
+        for weapon in self.weapons:
+            weaponPositionsString += weapon.name + ":" + str(weapon.position[0]) + "," + str(weapon.position[1])  + ";"
+
+        return weaponPositionsString
+
     def concatenateMatrices(self, *matrices):
         # rowNum = 0
         # while rowNum < len(attachment):

@@ -3,6 +3,7 @@ import sys
 import errno
 import threading
 import copy
+import time
 #import Queue
 
 from thread import *
@@ -133,6 +134,18 @@ def selectFromList(player, list, attr='__str__', callable=True):
         except Exception:
             printToPlayer(player, "Please enter a valid input")
 
+def selectFromListGUI(player, list, attr='__str__', callable=True):
+        #printToPlayer(player, "Select one from the followings:")
+        #counter = 0
+        if callable:
+            printToPlayer(player, ",".join(getattr(item, attr)() for item in list))
+        else:
+            printToPlayer(player, ",".join(getattr(item, attr) for item in list))
+
+        index = int(getPlayerInput(player, ""))
+        #counter+=1
+        return list[index]
+
 def printAll(players, message):
     #message += '\n'
        
@@ -143,8 +156,10 @@ def printAll(players, message):
 
 def printToPlayer(player,message):
     #str += '\n'
-
+    #player.conn.setblocking(0)
     player.conn.sendall(str(message) + '\n')
+    player.conn.sendall("")
+    #player.conn.flush()
     
 
 #main function
@@ -209,15 +224,23 @@ if __name__ == "__main__":
 
     # Assign characters to players
     characters = copy.deepcopy(gameBoard.characters)
-    
+
+    time.sleep(2)
+    #print("time is over")
     for player in players:
 
-        char = selectFromList(player, characters, 'name', False)
+        #char = selectFromList(player, characters, 'name', False)
+        char = selectFromListGUI(player, characters, 'name', False)
+        print(player.name + " picked " + char.name)
         for originalChar in gameBoard.characters:
             if originalChar.name == char.name:
                 player.character = originalChar
                 break
         characters.remove(char)
+
+        printToPlayer(player, "Char Update-" + gameBoard.sendCharPositions())
+        time.sleep(1) # to slush out buffer
+        printToPlayer(player, "Weapon Update-" + gameBoard.sendWeaponPositions())
 
     # Assign cards to the secret Envelope
     cardDeck = CardDeck()

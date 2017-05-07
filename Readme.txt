@@ -1,8 +1,14 @@
-To start the server: python socketServer.py
-socketServer.py listens on port 5555
+To start the server for the CLI version of the game. Note: socketServer.py listens on port 5555
+python socketServer.py
 
-To start the client: python telnetClient.py serverIP 5555
-serverIP should be the IP address socketServer.py is running on. If server and client are on the same machine, use "localhost"
+To start the client for the CLI version of the game. Note: serverIP should be the IP address socketServer.py is running on. If server and client are on the same machine, use "localhost"
+python telnetClient.py serverIP 5555
+
+To start the server for the GUI version of the game 
+python gameServer.py
+
+To start the client for the GUI version of the game 
+python gameClient.py serverIP 5555
 
 GameBoard Legends:
 
